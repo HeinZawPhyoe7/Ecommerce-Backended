@@ -105,10 +105,18 @@ class AuthController extends Controller
         /** @var JWTGuard $guard */
         $guard = auth();
 
+        $user = $guard->user();
+
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => $guard->factory()->getTTL() * 60,
+            'user' => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'usertype' => $user->usertype,
+            ]
         ]);
     }
 }

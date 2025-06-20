@@ -13,6 +13,8 @@ class AdminController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'category' => 'required|string|max:255',
+            'brand' => 'required|string|max:255',
             'images' => 'required|string',
             'description' => 'required|string',
             'price' => 'required|numeric|min:0',
@@ -22,6 +24,8 @@ class AdminController extends Controller
 
         $product = new Product();
         $product->name = $request->name;
+        $product->category = $request->category;
+        $product->brand = $request->brand;
         $base64String = $request->images;
 
         if (preg_match('/^data:image\/(\w+);base64,/', $base64String, $type)) {
