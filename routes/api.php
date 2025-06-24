@@ -17,4 +17,5 @@ Route::group([
     //Admin
     Route::post('/create/products', [AdminController::class, 'store'])->name('admin-create-product');
     Route::get('/getall/products', [AdminController::class, 'getall'])->name('getall-products');
+    Route::post('/search/product', [AdminController::class, 'search'])->name('search/product');
 });

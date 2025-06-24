@@ -66,4 +66,20 @@ class AdminController extends Controller
             ]
         );
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->name;
+
+        $products = Product::where('name', 'Like', "%{$query}%")
+            ->orwhere('category', 'Like', "%{$query}%")
+            ->orwhere('brand', 'Like', "%{$query}%")
+            ->get();
+
+        return response()->json([
+            'message' => 'success',
+            'products' => $products,
+
+        ]);
+    }
 }
