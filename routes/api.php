@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -18,4 +19,7 @@ Route::group([
     Route::post('/create/products', [AdminController::class, 'store'])->name('admin-create-product');
     Route::get('/getall/products', [AdminController::class, 'getall'])->name('getall-products');
     Route::post('/search/product', [AdminController::class, 'search'])->name('search/product');
+
+    //address
+    Route::post('/user/address', [AddressController::class, 'store'])->name('user-address');
 });
