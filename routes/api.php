@@ -21,5 +21,5 @@ Route::group([
     Route::post('/search/product', [AdminController::class, 'search'])->name('search/product');
 
     //address
-    Route::post('/user/address', [AddressController::class, 'store'])->name('user-address');
+    Route::post('/create/address', [AddressController::class, 'store'])->name('create-address');
 });

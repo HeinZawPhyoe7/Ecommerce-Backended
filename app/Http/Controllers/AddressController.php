@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Address;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AddressController extends Controller
 {
     public function store(Request $request)
     {
+
+        $user = Auth::user();
 
         $request->validate([
             'address' => 'required|string|max:255',
@@ -17,6 +20,7 @@ class AddressController extends Controller
             'recipient_name' => 'required|string|max:255',
             'phone' => 'required|numeric',
             'type' => 'required|string|max:255',
+            'product_id' => 'required|numeric',
         ]);
 
         $address = new Address();
@@ -26,6 +30,8 @@ class AddressController extends Controller
         $address->recipient_name = $request->recipient_name;
         $address->phone = $request->phone;
         $address->type = $request->type;
+        $address->user_id = $user->id;
+        $address->product_id = $request->product_id;
         $address->save();
 
         return response()->json([
