@@ -22,4 +22,5 @@ Route::group([
 
     //address
     Route::post('/create/address', [AddressController::class, 'store'])->name('create-address');
+    Route::get('/get/addresses', [AddressController::class, 'show'])->name('get/addresses');
 });

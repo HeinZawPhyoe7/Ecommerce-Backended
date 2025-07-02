@@ -12,6 +12,9 @@ class AddressController extends Controller
     {
 
         $user = Auth::user();
+        if (!$user) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
 
         $request->validate([
             'address' => 'required|string|max:255',
@@ -20,7 +23,8 @@ class AddressController extends Controller
             'recipient_name' => 'required|string|max:255',
             'phone' => 'required|numeric',
             'type' => 'required|string|max:255',
-            'product_id' => 'required|numeric',
+            'product_ids' => 'required|array',
+            'product_ids.*' => 'integer|exists:products,id',
         ]);
 
         $address = new Address();
@@ -31,12 +35,27 @@ class AddressController extends Controller
         $address->phone = $request->phone;
         $address->type = $request->type;
         $address->user_id = $user->id;
-        $address->product_id = $request->product_id;
+        $address->product_ids = $request->product_ids;
         $address->save();
 
         return response()->json([
             'message' => 'success',
             'address' => $address
         ], 201);
+    }
+
+    public function show()
+    {
+        $userId = Auth::id();
+        $addresses = Address::where('user_id', $userId)->get();
+
+        if ($addresses->isEmpty()) {
+            return response()->json(['message' => 'Address not found'], 404);
+        }
+
+        return response()->json([
+            'message' => 'success',
+            'address' => $addresses
+        ]);
     }
 }

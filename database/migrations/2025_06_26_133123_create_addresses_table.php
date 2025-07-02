@@ -19,12 +19,13 @@ return new class extends Migration
             $table->string('recipient_name');
             $table->bigInteger('phone');
             $table->string('type')->default('Home');
+            $table->enum('status', ['shipping', 'arrived', 'inBorder'])->default('shipping');
+            $table->enum('payment', ['cash', 'bank']);
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('product_id');
+            $table->json('product_ids');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
 
