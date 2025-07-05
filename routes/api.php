@@ -23,4 +23,5 @@ Route::group([
     //address
     Route::post('/create/address', [AddressController::class, 'store'])->name('create-address');
     Route::get('/get/addresses', [AddressController::class, 'show'])->name('get/addresses');
+    Route::post('/delete/product', [AddressController::class, 'delete'])->name('delete/product');
 });
