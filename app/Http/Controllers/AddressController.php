@@ -36,6 +36,8 @@ class AddressController extends Controller
         $address->recipient_name = $request->recipient_name;
         $address->phone = $request->phone;
         $address->type = $request->type;
+        $address->quantity = $request->quantity;
+        $address->total_price = $request->total_price;
         $address->user_id = $user->id;
         $address->product_ids = $request->product_ids;
         $address->save();
@@ -87,11 +89,9 @@ class AddressController extends Controller
         $currentProductIds = $address->product_ids ?? [];
         $productIdsToRemove = $request->product_ids ?? $request->productId ?? [];
 
-        // Check if all current product IDs are being removed
         $remainingProductIds = array_values(array_diff($currentProductIds, $productIdsToRemove));
 
         if (empty($remainingProductIds)) {
-            // No products left, delete the whole address row
             $address->delete();
 
             return response()->json([
@@ -100,7 +100,6 @@ class AddressController extends Controller
             ]);
         }
 
-        // Otherwise, just update the address with remaining products
         $address->product_ids = $remainingProductIds;
         $address->save();
 
