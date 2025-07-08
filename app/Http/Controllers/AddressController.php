@@ -36,7 +36,7 @@ class AddressController extends Controller
         $address->recipient_name = $request->recipient_name;
         $address->phone = $request->phone;
         $address->type = $request->type;
-        $address->quantity = $request->quantity;
+        $address->total_quantity = $request->total_quantity;
         $address->total_price = $request->total_price;
         $address->user_id = $user->id;
         $address->product_ids = $request->product_ids;

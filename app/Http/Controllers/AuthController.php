@@ -110,7 +110,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => $guard->factory()->getTTL() * 60 * 1800,
+            'expires_in' => $guard->factory()->getTTL() * 60 * 180,
             'user' => [
                 'id' => $user->id,
                 'name' => $user->name,

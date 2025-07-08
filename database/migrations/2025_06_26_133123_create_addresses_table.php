@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('type')->default('Home');
             $table->enum('status', ['shipping', 'arrived', 'inBorder'])->default('shipping');
             $table->enum('payment', ['cash', 'bank']);
-            $table->integer('quantity');
+            $table->integer('total_quantity');
             $table->bigInteger('total_price');
             $table->unsignedBigInteger('user_id');
             $table->json('product_ids');
